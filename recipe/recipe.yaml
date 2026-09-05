@@ -1,0 +1,47 @@
+schema_version: 1
+
+context:
+  name: nomad-camels-driver-agilent-34401a
+  version: "0.1.2"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/nomad_camels_driver_agilent_34401a-${{ version }}.tar.gz
+  sha256: 6fef2ffab9e1a5ddec6150c9343457e644231822c1ecfa737d362f9fd68e4166
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - setuptools >=61.0
+    - pip
+  run:
+    - python >=${{ python_min }}
+    - pyvisa
+    - pyvisa-py
+
+tests:
+  - python:
+      imports:
+        - nomad_camels_driver_agilent_34401a
+      pip_check: true
+      python_version:
+        - ${{ python_min }}
+        - "*"
+
+about:
+  summary: Device driver for the Agilent 34401A digital multimeter.
+  license: LGPL-2.1-or-later
+  license_file: LICENSE.txt
+  homepage: https://github.com/FAU-LAP/CAMELS_drivers
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
