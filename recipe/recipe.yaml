@@ -32,7 +32,9 @@ tests:
       imports:
         - nomad_camels_driver_agilent_34401a
       pip_check: true
-      python_version: ${{ python_min }}
+      python_version:
+        - ${{ python_min }}
+        - "*"
 
 about:
   summary: Device driver for the Agilent 34401A digital multimeter.
